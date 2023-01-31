@@ -1,3 +1,0 @@
--> apresentar um menu ao usuário com as opções de inclusão, exclusão, buscas, *árvores*, *relatório das árvores* e relatório da lista principal;
--> construir as árvores binária e AVL a partir de busc..., *cada grupo deve implementar algum tipo de FILTRO?! para selecionar os veículos*;
--> apresentar o relatório de todos os *clientes*? na tela do computador;

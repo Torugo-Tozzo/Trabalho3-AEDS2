@@ -7,6 +7,7 @@
 using namespace std;
 
 template <typename T>
+//Função de busca na árvore
 bool search(Node<T>* node, T value) {
     if (node == nullptr) {
         return false;
@@ -21,6 +22,7 @@ bool search(Node<T>* node, T value) {
 }
 
 template <typename T>
+//Busca o tamanho de um nó na árvore
 int height(Node<T>* node) {
     if (node == nullptr) {
         return 0;
@@ -29,6 +31,7 @@ int height(Node<T>* node) {
 }
 
 template <typename T>
+//Balancear árvore
 int getBalance(Node<T> *node) {
   if (node == nullptr)
     return 0;
@@ -36,6 +39,7 @@ int getBalance(Node<T> *node) {
 }
 
 template <typename T>
+//Rotação à direita
 Node<T>* rightRotate(Node<T>* node) {
     Node<T>* left = node->left;
     Node<T>* leftRight = left->right;
@@ -47,6 +51,7 @@ Node<T>* rightRotate(Node<T>* node) {
 }
 
 template <typename T>
+//Rotação à esquerda
 Node<T>* leftRotate(Node<T>* node) {
     Node<T>* right = node->right;
     Node<T>* rightLeft = right->left;
@@ -101,6 +106,7 @@ Node<T>* insert(Node<T>* node, T value){
 }
 
 template <typename T>
+//Percorre a árvore em pré-ordem
 void preOrder(Node<T>* node) {
     if (node == nullptr) {
         return;
@@ -111,6 +117,7 @@ void preOrder(Node<T>* node) {
 }
 
 template <typename T>
+//Percorre a árvore em ordem
 void inOrder(Node<T>* node) {
     if (node == nullptr) {
         return;
@@ -121,6 +128,7 @@ void inOrder(Node<T>* node) {
 }
 
 template <typename T>
+//Percorre a árvore em pós-ordem 
 void postOrder(Node<T>* node) {
     if (node == nullptr) {
         return;
@@ -131,6 +139,7 @@ void postOrder(Node<T>* node) {
 }
 
 template <typename T>
+//Encontrar o nó com o valor mínimo em uma árvore
 Node<T>* minValueNode(Node<T>* node) {
     Node<T>* current = node;
     while (current->left != nullptr) {
@@ -140,6 +149,7 @@ Node<T>* minValueNode(Node<T>* node) {
 }
 
 template <typename T>
+//Deletar nó de uma árvore
 Node<T>* deleteNode(Node<T>* root, T value) {
     if (root == nullptr) {
         return root;
@@ -187,6 +197,7 @@ Node<T>* deleteNode(Node<T>* root, T value) {
 }
 
 template <typename T>
+//Libera a memória de uma árvore
 void freeTree(Node<T>* root) {
     if (root == nullptr) {
         return;
@@ -197,6 +208,7 @@ void freeTree(Node<T>* root) {
 }
 
 template <typename T>
+//print tree
 void printTree(Node<T>* root, int level) {
     if (root == nullptr) {
         return;

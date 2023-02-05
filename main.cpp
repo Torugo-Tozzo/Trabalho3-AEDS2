@@ -112,6 +112,20 @@ int main(int argc, char**argv){
     Node<string>* rootBIFiltro = nullptr;
     Node<float>* rootAVLPreco = nullptr;
 
+
+/*
+    AVL<int> avlTree;
+    avlTree.root = avlTree.insert(avlTree.root, 100);
+    avlTree.root = avlTree.insert(avlTree.root, 20);
+    avlTree.root = avlTree.insert(avlTree.root, 380);
+    avlTree.root = avlTree.insert(avlTree.root, 40);
+    avlTree.root = avlTree.insert(avlTree.root, 50);
+    avlTree.root = avlTree.insert(avlTree.root, 25);
+    avlTree.inOrder(avlTree.root);
+*/
+
+
+
     Veiculo *percorredor;
 
     /* Fazendo inserção de todos os veiculos nas arvore AVL e BINARIA */

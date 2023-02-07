@@ -41,16 +41,7 @@ int main(int argc, char**argv){
 
     binaria.in_order(binaria.raiz);
 
-    ArvAVL avl;
-
-    percorredor = cabeca->inicio->prox;
-    while (percorredor != NULL)
-    {
-        avl.raiz = avl.inserir(avl.raiz, percorredor);
-        percorredor = percorredor->prox;
-    }
-
-    avl.exibirArvore(avl.raiz, 0);
+    
 
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa,preco;
 

@@ -41,12 +41,12 @@ int main(int argc, char**argv){
 
     binaria.in_order(binaria.raiz);
 
- /*  AVLTree *tree;
+   NoAVL *tree;
 
-   tree->raiz = inserirNoAVL(tree->raiz, 10);
-    tree->raiz = inserirNoAVL(tree->raiz, 20);
-    tree->raiz = inserirNoAVL(tree->raiz, 30);
-*/
+    tree = inserirNoAVL(tree, "dwada");
+    tree = inserirNoAVL(tree, "uiwoa");
+    tree = inserirNoAVL(tree, "dfefeisa");
+
     string modelo,marca,versao,ano,kilometragem,motor,consumo,moua,direcao,cor,portas,placa,preco;
 
     cout << "\n-----------------------------Menu---------------------------------\n" 

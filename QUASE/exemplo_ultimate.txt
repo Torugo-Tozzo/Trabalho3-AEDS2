@@ -1,0 +1,20 @@
+GOLF Volkswagen Hatch 2020 34145 1.4 Flex Manual Hidráulica Azul 4 JRE4444 72269
+UNO WAY FIAT Hatch 2021 28512 1.0 Flex Manual Hidráulica Vermelho 4 WEU8415 63789
+COROLLA Toyota Sedã 2021 47984 1.8 Flex Automático Elétrica Preto 4 POI5788 84839
+PALIO FIAT Hatch 2019 25900 1.0 Flex Manual Elétrica Verde 4 YUE5714 53121
+CIVIC Honda Sedã 2021 50861 2.0 Flex Automático Hidráulica Preto 4 LKF6954 84444
+ECOSPORT Ford SUV 2019 37278 1.6 Flex Manual Elétrica Branco 4 UIA6524 74333
+SPIN Chevrolet MPV 2020 35280 1.8 Flex Automático Elétrica Cinza 4 LQA7547 85876
+SWIFT Suzuki Hatch 2020 30047 1.2 Flex Manual Hidráulica Vermelho 4 MNO1213 68432
+CELTA Chevrolet Hatch 2021 28250 1.0 Flex Manual Elétrica Amarelo 4 LKF4554 65200
+ONIX Chevrolet Hatch 2020 38280 1.0 Flex Manual Elétrica Prata 4 BVC6798 79876
+CRUZE Chevrolet Sedã 2019 51700 1.5 Flex Automático Hidráulica Cinza 4 TYU5477 76657
+RIO KIA Hatch 2020 30452 1.5 Flex Manual Elétrica Verde 4 QAZ9876 63598
+SANTA_FE Hyundai SUV 2021 56783 2.0 Flex Automático Hidráulica Preto 4 BNM6598 87769
+SANDERO RENAULT Hatch 2019 26600 1.0 Flex Manual Elétrica Amarelo 4 CBA3214 52475
+SORENTO KIA SUV 2021 67284 2.4 Flex Automático Hidráulica Preto 4 POI1236 87969
+SYMBOL RENAULT Sedã 2019 49870 1.6 Flex Manual Hidráulica Prata 4 QWE7544 78583
+HR_V HONDA SUV 2020 44287 1.8 Flex Automático Elétrica Vermelho 4 ASF4555 85566
+SPARK Chevrolet Hatch 2020 27450 1.0 Flex Manual Elétrica Azul 4 KMN5477 63888
+OUTLANDER Mitsubishi SUV 2020 54685 2.4 Flex Automático Hidráulica Cinza 4 UIA6533 89876
+TUCSON Hyundai SUV 2021 57000 2.0 Flex Automático Hidráulica Preto 4 BVC4565 87896

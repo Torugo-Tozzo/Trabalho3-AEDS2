@@ -107,6 +107,18 @@ int main(int argc, char **argv)
         percorredor = percorredor->prox;
     }
 
+    ArvAVL avlFiltro;
+
+    percorredor = cabeca->inicio->prox;
+    while (percorredor != NULL)
+    {   
+        if(percorredor->moua == "Automático")
+        {
+        avlFiltro.raiz = avl.insert(avl.raiz, percorredor);
+        }
+        percorredor = percorredor->prox;
+    }
+
     string modelo, marca, versao, ano, kilometragem, motor, consumo, moua, direcao, cor, portas, placa, preco;
     int escolha, escolha1, escolha2, excoun; // do swtch 1 ,2 ,3 ,n.....
     string consulta, arq_name;               // da busca placa , nome do arquivo a ser adicionado
@@ -114,7 +126,7 @@ int main(int argc, char **argv)
     {
         cout << "\n-----------------------------Menu---------------------------------\n"
                 " (0) - Mostrar arvores\n"
-                " (1) - Buscar carro na arvore\n"
+                " (1) - Buscar carro na arvore (excluir)\n"
                 " (2) - Add carro na arvore(arquivo)\n"
                 " (3) - \n"
              << endl;
@@ -123,8 +135,9 @@ int main(int argc, char **argv)
         switch (escolha)
         {
         case 0:
-            cout << " (1) - Arvore AVL\n"
-                    " (2) - Arvore Binaria\n"
+            cout << " (1) - Arvore Binaria\n"
+                    " (2) - Arvore AVL\n"
+                    " (3) - Arvore AVL com filtro de carros automaticos com preço acima de 75k \n"
                  << endl;
             cin >> escolha1;
             switch (escolha1)
@@ -139,6 +152,11 @@ int main(int argc, char **argv)
                 avl.exibirArvore(avl.raiz, 0);
                 cout << "placas em ordem:" << endl;
                 avl.in_order(avl.raiz);
+                break;
+            case 3:
+                avlFiltro.exibirArvore(avlFiltro.raiz, 0);
+                cout << "placas em ordem:" << endl;
+                avlFiltro.in_order(avlFiltro.raiz);
                 break;
 
             default:
@@ -158,6 +176,7 @@ int main(int argc, char **argv)
             if (excoun == 1)
             {
                 avl.raiz = avl.deleteNode(avl.raiz, consulta);
+                binaria.raiz = binaria.deleteNodeB(binaria.raiz, consulta);
                 cout << "Done" << endl;
             }
             else
@@ -168,7 +187,7 @@ int main(int argc, char **argv)
             cout << "(1) - Para inserir manualmente\n"
                     "(2) - Para inserir a partir de um arquivo"
                  << endl;
-                 cin >> escolha2;
+            cin >> escolha2;
             switch (escolha2)
             {
             case 1:

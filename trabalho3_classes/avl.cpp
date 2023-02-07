@@ -4,180 +4,140 @@
 
 using namespace std;
 
-class NoAVL
-{
+class NoAVL {
 public:
-    Veiculo *veiculo;
-    NoAVL *esq;
-    NoAVL *dir;
-    int altura;
+int valor;
+int altura;
+NoAVL *esq;
+NoAVL *dir;
 
-    NoAVL(Veiculo *v)
+NoAVL::NoAVL()
+{
+    esq = NULL;
+    dir = NULL;
+    altura = 1;
+    valor = 0;
+}
+
+NoAVL(int valor)
     {
-        veiculo = v;
-        esq = NULL;
-        dir = NULL;
-        altura = 0;
+        this->valor = valor;
+        this->altura = 1;
+        this->esq = NULL;
+        this->dir = NULL;
     }
 };
-
-class ArvAVL
+NoAVL* novoNoAVL(int chave) 
+{ 
+    NoAVL* novoNo = new NoAVL(); 
+    novoNo->valor = chave; 
+    novoNo->esq = NULL; 
+    novoNo->dir = NULL; 
+    novoNo->altura = 1; 
+    return novoNo; 
+} 
+int getAltura(NoAVL *node)
 {
-public:
-    NoAVL *raiz;
+if (node == NULL)
+{
+return 0;
+}
+else
+{
+return node->altura;
+}
+}
 
-    ArvAVL()
+int getFatorBalanco(NoAVL *node)
+{
+if (node == NULL)
+{
+return 0;
+}
+else
+{
+return getAltura(node->esq) - getAltura(node->dir);
+}
+}
+
+void atualizaAltura(NoAVL *node)
+{
+node->altura = max(getAltura(node->esq), getAltura(node->dir)) + 1;
+}
+
+NoAVL *rotacaoDireita(NoAVL *node)
+{
+NoAVL *temp = node->esq;
+node->esq = temp->dir;
+temp->dir = node;
+atualizaAltura(node);
+atualizaAltura(temp);
+return temp;
+}
+
+NoAVL *rotacaoEsquerda(NoAVL *node)
+{
+NoAVL *temp = node->dir;
+node->dir = temp->esq;
+temp->esq = node;
+atualizaAltura(node);
+atualizaAltura(temp);
+return temp;
+}
+
+NoAVL *rotacaoDuplaDireita(NoAVL *node)
+{
+node->esq = rotacaoEsquerda(node->esq);
+return rotacaoDireita(node);
+}
+
+NoAVL *rotacaoDuplaEsquerda(NoAVL *node)
+{
+node->dir = rotacaoDireita(node->dir);
+return rotacaoEsquerda(node);
+}
+
+NoAVL* inserirNoAVL(NoAVL *node, int valor)
+{
+    if (node == NULL)
     {
-        raiz = NULL;
+        return novoNoAVL(valor);
+    }
+    if (valor < node->valor)
+    {
+        node->esq = inserirNoAVL(node->esq, valor);
+    }
+    else if (valor > node->valor)
+    {
+        node->dir = inserirNoAVL(node->dir, valor);
+    }
+    else
+    {
+        return node;
     }
 
-    int altura(NoAVL *no)
-    {
-        if (no == NULL)
-            return -1;
-        return 1 + max(altura(no->esq), altura(no->dir));
-    }
+    node->altura = 1 + max(getAltura(node->esq), getAltura(node->dir));
 
-    NoAVL *rotacaoEsquerda(NoAVL *node)
-    {
-        NoAVL *u = node->dir;
-        node->dir = u->esq;
-        u->esq = node;
-        node->altura = max(altura(node->esq), altura(node->dir)) + 1;
-        u->altura = max(altura(u->esq), altura(u->dir)) + 1;
-        return u;
-    }
+    int fatorBalanceamento = getFatorBalanco(node);
 
-    NoAVL *rotacaoDireita(NoAVL *node)
+    if (fatorBalanceamento > 1 && valor < node->esq->valor)
     {
-        NoAVL *u = node->esq;
-        node->esq = u->dir;
-        u->dir = node;
-        node->altura = max(altura(node->esq), altura(node->dir)) + 1;
-        u->altura = max(altura(u->esq), altura(u->dir)) + 1;
-        return u;
+        return rotacaoDireita(node);
     }
-
-    NoAVL *rotacaoEsquerdaDireita(NoAVL *node)
+    if (fatorBalanceamento < -1 && valor > node->dir->valor)
+    {
+        return rotacaoEsquerda(node);
+    }
+    if (fatorBalanceamento > 1 && valor > node->esq->valor)
     {
         node->esq = rotacaoEsquerda(node->esq);
         return rotacaoDireita(node);
     }
-
-    NoAVL *rotacaoDireitaEsquerda(NoAVL *node)
+    if (fatorBalanceamento < -1 && valor < node->dir->valor)
     {
         node->dir = rotacaoDireita(node->dir);
         return rotacaoEsquerda(node);
     }
 
-    NoAVL *inserir(NoAVL *node, Veiculo *veiculo)
-    {
-        if (node == NULL)
-        {
-            return new NoAVL(veiculo);
-        }
-        if (veiculo->placa < node->veiculo->placa)
-        {
-            node->esq = inserir(node->esq, veiculo);
-            if (altura(node->esq) - altura(node->dir) == 2)
-            {
-                if (veiculo->placa < node->esq->veiculo->placa)
-                {
-                    node = rotacaoDireita(node);
-                }
-                else
-                {
-                    node = rotacaoEsquerdaDireita(node);
-                }
-            }
-        }
-        else if (veiculo->placa > node->veiculo->placa)
-        {
-            node->dir = inserir(node->dir, veiculo);
-            int balanceamento = getBalanceamento(node);
-            if (balanceamento > 1 && veiculo->placa > node->esq->veiculo->placa)
-            {
-                return rotacaoDireita(node);
-            }
-
-            if (balanceamento < -1 && veiculo->placa < node->dir->veiculo->placa)
-            {
-                return rotacaoEsquerda(node);
-            }
-
-            if (balanceamento > 1 && veiculo->placa < node->esq->veiculo->placa)
-            {
-                node->esq = rotacaoEsquerda(node->esq);
-                return rotacaoDireita(node);
-            }
-
-            if (balanceamento < -1 && veiculo->placa > node->dir->veiculo->placa)
-            {
-                node->dir = rotacaoDireita(node->dir);
-                return rotacaoEsquerda(node);
-            }
-
-            return node;
-        }
-    }
-
-    int getAltura(NoAVL *node)
-    {
-        if (node == NULL)
-        {
-            return 0;
-        }
-        else
-        {
-            return node->altura;
-        }
-    }
-
-    int getBalanceamento(NoAVL *node)
-    {
-        if (node == NULL)
-        {
-            return 0;
-        }
-        else
-        {
-            return getAltura(node->esq) - getAltura(node->dir);
-        }
-    }
-
-    void in_order(NoAVL *no) {
-    if (no != NULL) {
-      in_order(no->esq);
-      cout << no->veiculo->placa << " ";
-      in_order(no->dir);
-    }
-  }
-
-  void pre_order(NoAVL *no) {
-    if (no != NULL) {
-      cout << no->veiculo->placa << " ";
-      pre_order(no->esq);
-      pre_order(no->dir);
-    }
-  }
-
-  void post_order(NoAVL *no) {
-    if (no != NULL) {
-      post_order(no->esq);
-      post_order(no->dir);
-      cout << no->veiculo->placa << " ";
-    }
-  }
-  
-void exibirArvore(NoAVL* root, int level) {
-    if (root == nullptr) {
-        return;
-    }
-    exibirArvore(root->dir, level + 1);
-    for (int i = 0; i < level; i++) {
-        std::cout << "        ";
-    }
-    std::cout << root->veiculo->placa << std::endl;
-    exibirArvore(root->esq, level + 1);
+    return node;
 }
-};

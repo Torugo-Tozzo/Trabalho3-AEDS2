@@ -62,29 +62,19 @@ public:
       return no->veiculo;
   }
 
-  void in_order(No *no)
-  {
-    if (no != NULL)
-    {
-      in_order(no->left);
-      cout << no->veiculo->placa << " ";
-      in_order(no->right);
-    }
-  }
-
   No *deleteNodeB(No *root, string placa)
   {
     // base case
     if (root == NULL)
       return root;
 
-    // If the placa to be deleted is
+    // If the "placa" to be deleted is
     // smaller than the root's
     // placa, then it lies in left subtree
     if (placa < root->veiculo->placa)
       root->left = deleteNodeB(root->left, placa);
 
-    // If the placa to be deleted is
+    // If the "placa" to be deleted is
     // greater than the root's
     // placa, then it lies in right subtree
     else if (placa > root->veiculo->placa)
@@ -126,47 +116,24 @@ public:
   }
 
   No *minValueNode(No *node)
-    {
-        No *current = node;
-
-        while (current->left != NULL)
-            current = current->left;
-
-        return current;
-    }
-
-  void pre_order(No *no)
   {
-    if (no != NULL)
-    {
-      cout << no->veiculo->placa << " ";
-      pre_order(no->left);
-      pre_order(no->right);
-    }
+    No *current = node;
+
+    while (current->left != NULL)
+      current = current->left;
+
+    return current;
   }
 
-  void post_order(No *no)
+  void freeTree(No *node)
   {
-    if (no != NULL)
-    {
-      post_order(no->left);
-      post_order(no->right);
-      cout << no->veiculo->placa << " ";
-    }
-  }
-
-  void exibirArvore(No *root, int level)
-  {
-    if (root == nullptr)
+    if (node == NULL)
     {
       return;
     }
-    exibirArvore(root->right, level + 1);
-    for (int i = 0; i < level; i++)
-    {
-      std::cout << "        ";
-    }
-    std::cout << root->veiculo->placa << std::endl;
-    exibirArvore(root->left, level + 1);
+    freeTree(node->left);
+    freeTree(node->right);
+    free(node);
   }
+  //
 };

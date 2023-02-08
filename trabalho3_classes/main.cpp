@@ -10,7 +10,6 @@
 --------------------------------------------------------------------------------------------------*/
 # include <iostream>
 # include <string>
-//# include "arvores.cpp"
 #include "lista.h"
 #include "lista.cpp"
 #include "binaria.cpp"

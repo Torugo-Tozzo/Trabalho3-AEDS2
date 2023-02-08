@@ -78,6 +78,63 @@ void addLista_arv(Cabecalho *listaAlvo, Cabecalho *listaCopia, ArvAVL avl, ArvBi
     }
 }
 
+void exibirArvore(No *root, int level)
+{
+    if (root == nullptr)
+    {
+        return;
+    }
+    exibirArvore(root->right, level + 1);
+    for (int i = 0; i < level; i++)
+    {
+        std::cout << "        ";
+    }
+    std::cout << root->veiculo->placa << std::endl;
+    exibirArvore(root->left, level + 1);
+}
+
+void in_order(No *no)
+{
+    if (no != NULL)
+    {
+        in_order(no->left);
+        cout << no->veiculo->placa << " ";
+        in_order(no->right);
+    }
+}
+
+void pre_order(No *no)
+{
+    if (no != NULL)
+    {
+        cout << no->veiculo->placa << " ";
+        pre_order(no->left);
+        pre_order(no->right);
+    }
+}
+
+void post_order(No *no)
+{
+    if (no != NULL)
+    {
+        post_order(no->left);
+        post_order(no->right);
+        cout << no->veiculo->placa << " ";
+    }
+}
+
+void freeTree(No *node)
+{
+    if (node == NULL)
+    {
+        return;
+    }
+
+    freeTree(node->left);
+    freeTree(node->right);
+    free(node);
+}
+
 int main(int argc, char **argv)
 {
 
@@ -111,10 +168,10 @@ int main(int argc, char **argv)
 
     percorredor = cabeca->inicio->prox;
     while (percorredor != NULL)
-    {   
-        if(percorredor->moua == "Automático")
+    {
+        if (percorredor->moua == "Automático")
         {
-        avlFiltro.raiz = avl.insert(avl.raiz, percorredor);
+            avlFiltro.raiz = avl.insert(avl.raiz, percorredor);
         }
         percorredor = percorredor->prox;
     }
@@ -128,7 +185,8 @@ int main(int argc, char **argv)
                 " (0) - Mostrar arvores\n"
                 " (1) - Buscar carro na arvore (excluir)\n"
                 " (2) - Add carro na arvore(arquivo)\n"
-                " (3) - \n"
+                " (3) - Mostrar veiculos da lista principal\n"
+                " (4) - Sair\n"
              << endl;
 
         cin >> escolha;
@@ -143,20 +201,20 @@ int main(int argc, char **argv)
             switch (escolha1)
             {
             case 1:
-                binaria.exibirArvore(binaria.raiz, 0);
-                cout << "placas em ordem:" << endl;
-                binaria.in_order(binaria.raiz);
+                exibirArvore(binaria.raiz, 0);
+                cout << "placas em pre ordem:" << endl;
+                pre_order(binaria.raiz);
                 break;
 
             case 2:
-                avl.exibirArvore(avl.raiz, 0);
-                cout << "placas em ordem:" << endl;
-                avl.in_order(avl.raiz);
+                exibirArvore(avl.raiz, 0);
+                cout << "placas em pre ordem:" << endl;
+                pre_order(avl.raiz);
                 break;
             case 3:
-                avlFiltro.exibirArvore(avlFiltro.raiz, 0);
-                cout << "placas em ordem:" << endl;
-                avlFiltro.in_order(avlFiltro.raiz);
+                exibirArvore(avlFiltro.raiz, 0);
+                cout << "placas em pre ordem:" << endl;
+                pre_order(avlFiltro.raiz);
                 break;
 
             default:
@@ -232,22 +290,18 @@ int main(int argc, char **argv)
             }
             break;
         case 3:
-            /* code */
-            break;
-        case 4:
-            /* code */
-            break;
-        case 5:
-            /* code */
+            imprime(cabeca);
             break;
 
         default:
             break;
         }
-    } while (escolha != 7);
+    } while (escolha != 4);
     salva(cabeca);
 
     encerra_lista(cabeca);
-    // freeTree(rootAVL);freeTree(rootBI);freeTree(rootBIFiltro);freeTree(rootAVLFiltro);
+    freeTree(avl.raiz);
+    freeTree(binaria.raiz);
+    cout << "lista e arvores desalocadas" << endl;
     return 0;
 }

@@ -135,6 +135,18 @@ void freeTree(No *node)
     free(node);
 }
 
+int heightTree(No *raiz)
+{
+    if (raiz == NULL)
+    {
+        return 0;
+    }
+    int alturaEsquerda = heightTree(raiz->left);
+    int alturaDireita = heightTree(raiz->right);
+
+    return (alturaEsquerda > alturaDireita ? alturaEsquerda : alturaDireita) + 1;
+}
+
 int main(int argc, char **argv)
 {
 
@@ -169,9 +181,21 @@ int main(int argc, char **argv)
     percorredor = cabeca->inicio->prox;
     while (percorredor != NULL)
     {
-        if (percorredor->moua == "Automático")
+        if (percorredor->moua == "Automático" && stoi(percorredor->preco) > 75000)
         {
             avlFiltro.raiz = avl.insert(avl.raiz, percorredor);
+        }
+        percorredor = percorredor->prox;
+    }
+
+    ArvBinaria binariaFiltro;
+
+    percorredor = cabeca->inicio->prox;
+    while (percorredor != NULL)
+    {
+        if (percorredor->moua == "Automático" && stoi(percorredor->preco) > 75000)
+        {
+            binariaFiltro.inserir(percorredor);
         }
         percorredor = percorredor->prox;
     }
@@ -196,25 +220,34 @@ int main(int argc, char **argv)
             cout << " (1) - Arvore Binaria\n"
                     " (2) - Arvore AVL\n"
                     " (3) - Arvore AVL com filtro de carros automaticos com preço acima de 75k \n"
-                 << endl;
+                    " (4) - Arvore Binaria com filtro de carros automaticos com preço acima de 75k \n" << endl;
             cin >> escolha1;
             switch (escolha1)
             {
             case 1:
                 exibirArvore(binaria.raiz, 0);
+                cout << "Altura da arvore: "<< heightTree(binaria.raiz) << endl;
                 cout << "placas em pre ordem:" << endl;
                 pre_order(binaria.raiz);
                 break;
 
             case 2:
                 exibirArvore(avl.raiz, 0);
+                cout << "Altura da arvore: "<< heightTree(avl.raiz) << endl;
                 cout << "placas em pre ordem:" << endl;
                 pre_order(avl.raiz);
                 break;
             case 3:
                 exibirArvore(avlFiltro.raiz, 0);
+                cout << "Altura da arvore: "<< heightTree(avlFiltro.raiz) << endl;
                 cout << "placas em pre ordem:" << endl;
                 pre_order(avlFiltro.raiz);
+                break;
+            case 4:
+                exibirArvore(binariaFiltro.raiz,0);
+                cout << "Altura da arvore: "<< heightTree(binariaFiltro.raiz) << endl;
+                cout << "placas em pre ordem:" << endl;
+                pre_order(binariaFiltro.raiz);
                 break;
 
             default:
